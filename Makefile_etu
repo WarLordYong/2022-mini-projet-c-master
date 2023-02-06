@@ -1,0 +1,24 @@
+PROJECTS := GenMap StrategyDummy
+
+ifdef debug
+	DIR = linux/debug
+	SUFFIX = _d
+else
+	DIR = linux/release
+	SUFFIX =
+endif
+
+.PHONY: all $(PROJECTS)
+all: $(PROJECTS)
+
+export debug
+
+$(PROJECTS):
+	@echo "-------------------------------------------"
+	@echo "--- Compilation of the project '$@'"
+	@echo "---"
+	@$(MAKE) -C $@
+
+run:	
+# bin/$(DIR)/dicewars$(SUFFIX) -r bin/$(DIR)/referee$(SUFFIX).so -m bin/$(DIR)/genmap$(SUFFIX).so -g bin/$(DIR)/gui$(SUFFIX).so -s bin/$(DIR)/strategy$(SUFFIX).so -s bin/$(DIR)/strategy$(SUFFIX).so
+	./bin/x64/Debug/DiceWars.exe -s ./bin/x64/Debug/StrategyMix.dll -s ./bin/x64/Debug/Strategy.dll -r ./bin/x64/Debug/Referee.dll -m ./bin/x64/Debug/GenMap.dll -g ./bin/x64/Debug/Gui.dll
